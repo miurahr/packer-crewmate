@@ -13,8 +13,9 @@ if [ ! -d $RUNDIR ]; then
   sudo chgrp docker $RUNDIR
 fi
 
-docker run -d -p 22 -p 8080 -e \
-  -e "CREWMATE_DB_SERVER=dbserver" \
+docker run -d -p 22 -p 3000 -e "RAILS_ENV=development" \
+  -e "CREWMATE_DB_SERVER=dbserver" -e "CREWMATE_DB_USER=postgres" \
+  -e "CREWMATE_DB_PASS=pass"
   $DOCKERHUB_REPO $RUNNER
 
 DPID=`sudo docker ps -q -l`
