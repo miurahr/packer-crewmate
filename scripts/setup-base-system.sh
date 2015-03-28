@@ -15,12 +15,6 @@ apt-get -y install \
   g++ \
   make
 
-apt-get -y install \
-  ruby ruby-dev irb libmysqlclient15-dev sqlite3 libsqlite3-dev \
-  libcurl4-openssl-dev libopenssl-ruby libpcre3-dev libxml2-dev libxslt-dev \
-  libreadline5-dev imagemagick libpq-dev \
-  libmysql-ruby libmysqlclient-dev
-
 mkdir -p /root/.ssh /var/run/sshd
 sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config

@@ -2,7 +2,7 @@
   "builders": [
     {
         "type": "docker",
-        "image": "ubuntu:14.04.2",
+        "image": "miurahr/rbdev:1.9.3-p551",
         "commit": true,
         "pull": true
     }
