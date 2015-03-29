@@ -11,6 +11,7 @@ apt-get -y install \
   libreadline-gplv2-dev
 
 source /etc/profile.d/rbenv.sh
+echo "gem: --no-document" >> /etc/gemrc
 
 gem update --system
 gem install bundler pg rails thin --no-rdoc --no-ri
@@ -21,7 +22,7 @@ cd /srv/crewmate
 if [ -e /srv/crewmate/.ruby-version ]; then
   rm -f /srv/crewmate/.ruby-version
 fi
-gem install debugger
+gem install debugger --no-rdoc --no-ri
 bundle install
 
 install /tmp/crewmate/crewmate.yml config/
@@ -33,8 +34,8 @@ chmod 777 /srv/crewmate/log
 
 # create development database
 cd /srv/crewmate
-sudo -u crewmate -i -E /bin/bash -c \
-  "source /etc/profile.d/rbenv.sh; bundle exec rake db:create db:schema:load RAILS_ENV=development"
+#sudo -u crewmate -i -E /bin/bash -c \
+#  "source /etc/profile.d/rbenv.sh; bundle exec rake db:create db:schema:load RAILS_ENV=development"
 
 # setup startup scripts
 
