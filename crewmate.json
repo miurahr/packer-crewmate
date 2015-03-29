@@ -2,7 +2,7 @@
   "builders": [
     {
         "type": "docker",
-        "image": "miurahr/rbdev:1.9.3-p551",
+        "image": "miurahr/rbenv:1.9.3-p551",
         "commit": true,
         "pull": true
     }
