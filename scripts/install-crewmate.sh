@@ -3,9 +3,12 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get -y install \
-  acl libmysqlclient15-dev sqlite3 libsqlite3-dev \
+  acl imagemagick libpq5 sqlite3 libmysqlclient18 \
+  libcurl3 libcurl3-nss libpcre3 libxml2 libxslt1.1 \
+  libreadline5 \
+  libmysqlclient-dev libsqlite3-dev libpq-dev \
   libcurl4-openssl-dev libpcre3-dev libxml2-dev libxslt-dev \
-  imagemagick libpq-dev libmysqlclient-dev libreadline-gplv2-dev
+  libreadline-gplv2-dev
 
 source /etc/profile.d/rbenv.sh
 
@@ -38,3 +41,10 @@ bundle exec rake db:create db:schema:load RAILS_ENV=development
 install -d /srv/crewmate/bin
 install -m 755 /tmp/supervisor/crewmate.sh /srv/crewmate/bin/
 
+# cleanup dev files
+apt-get -y remove \
+  libmysqlclient-dev libsqlite3-dev libpq-dev \
+  libcurl4-openssl-dev libpcre3-dev libxml2-dev libxslt-dev \
+  libreadline-gplv2-dev
+apt-get -y autoremove
+apt-get clean
