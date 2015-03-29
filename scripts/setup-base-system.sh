@@ -24,4 +24,4 @@ echo 'root:root' | chpasswd
 useradd -m -s /bin/bash crewmate 
 echo 'crewmate:crewmate' | chpasswd
 echo 'crewmate ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/crewmate
-
+echo 'crewmate:crewmate' | chpasswd

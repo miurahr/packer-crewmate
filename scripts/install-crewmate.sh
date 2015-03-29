@@ -3,7 +3,7 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get -y install \
-  acl imagemagick libpq5 sqlite3 libmysqlclient18 \
+  imagemagick libpq5 sqlite3 libmysqlclient18 \
   libcurl3 libcurl3-nss libpcre3 libxml2 libxslt1.1 \
   libreadline5 \
   libmysqlclient-dev libsqlite3-dev libpq-dev \
@@ -28,14 +28,8 @@ install /tmp/crewmate/crewmate.yml config/
 install /tmp/crewmate/database.yml config/
 
 # setup directories
-install -d /srv/crewmate/db
-
-# add permissions
-setfacl -m user:crewmate:rwx /srv/crewmate/log
-setfacl -m user:crewmate:rwx /srv/crewmate/db
-
-# create development database
-bundle exec rake db:create db:schema:load RAILS_ENV=development
+install -d -o crewmate -g crewmate /srv/crewmate/db
+chmod 777 /srv/crewmate/log
 
 # setup startup scripts
 install -d /srv/crewmate/bin
@@ -48,3 +42,7 @@ apt-get -y remove \
   libreadline-gplv2-dev
 apt-get -y autoremove
 apt-get clean
+
+# create development database
+sudo -u crewmate -i -E /bin/bash -c \
+  "source /etc/profile.d/rbenv.sh; bundle exec rake db:create db:schema:load RAILS_ENV=development"
