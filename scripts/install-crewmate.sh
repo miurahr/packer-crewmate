@@ -31,7 +31,13 @@ install /tmp/crewmate/database.yml config/
 install -d -o crewmate -g crewmate /srv/crewmate/db
 chmod 777 /srv/crewmate/log
 
+# create development database
+cd /srv/crewmate
+sudo -u crewmate -i -E /bin/bash -c \
+  "source /etc/profile.d/rbenv.sh; bundle exec rake db:create db:schema:load RAILS_ENV=development"
+
 # setup startup scripts
+
 install -d /srv/crewmate/bin
 install -m 755 /tmp/supervisor/crewmate.sh /srv/crewmate/bin/
 
@@ -42,7 +48,3 @@ apt-get -y remove \
   libreadline-gplv2-dev
 apt-get -y autoremove
 apt-get clean
-
-# create development database
-sudo -u crewmate -i -E /bin/bash -c \
-  "source /etc/profile.d/rbenv.sh; bundle exec rake db:create db:schema:load RAILS_ENV=development"
