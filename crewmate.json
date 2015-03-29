@@ -24,6 +24,7 @@
       "type": "shell",
       "scripts": [
         "scripts/setup-base-system.sh",
+        "scripts/install-sphinx.sh",
         "scripts/install-crewmate.sh"
       ]
     },
